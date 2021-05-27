@@ -3,7 +3,7 @@
         <fileDesc>
             <titleStmt>
                 <title>
-      The Complete Poems of Paul Laurence Dunbar
+                    The Complete Poems of Paul Laurence Dunbar
                 </title>
                 <author>Paul Laurence Dunbar</author>
                 <commentator>William Dean Howells</commentator>
@@ -44,25 +44,26 @@
             </publicationStmt>
 
             <publicationStmt>
-Dodd, Mead and Company</publisher>
-            <date>1896, 1899, 1903, 1905, 1913</date>
-        </publicationStmt>
-    </fileDesc>
-    <encodingDesc>
-        <samplingDecl>
-            <p>Only the contained poems have been encoded within.</p>
-        </samplingDecl>
-        <normalization method="silent">
-            <p>1. Many contractions which would normally be printed together in their shortened form are left spaced, as printed. Sometimes this is done due to the meter of the poem. Other times it is just the older way that printers handled these words. The original was not always consistent about how these were handled, and may have been contracted to save space.</p>
-            <p>2. Since this book has a significant amount of dialect, no attempt was made to change any odd spellings. Some of these words are not easy to translate, but usually the context will be sufficient. For instance, the word <em>stuhs</em> means stirs, as, 'dat melody stuhs me up'.</p>
-        </normalization>
-    </encodingDesc>
-    <profileDesc>
-        <langUsage>
-            <language ident="en">English</language>
-        </langUsage>
-    </profileDesc>
-</teiHeader>
+                <publisher>
+                    Dodd, Mead and Company</publisher>
+                <date>1896, 1899, 1903, 1905, 1913</date>
+            </publicationStmt>
+        </fileDesc>
+        <encodingDesc>
+            <samplingDecl>
+                <p>Only the contained poems have been encoded within.</p>
+            </samplingDecl>
+            <normalization method="silent">
+                <p>1. Many contractions which would normally be printed together in their shortened form are left spaced, as printed. Sometimes this is done due to the meter of the poem. Other times it is just the older way that printers handled these words. The original was not always consistent about how these were handled, and may have been contracted to save space.</p>
+                <p>2. Since this book has a significant amount of dialect, no attempt was made to change any odd spellings. Some of these words are not easy to translate, but usually the context will be sufficient. For instance, the word <em>stuhs</em> means stirs, as, 'dat melody stuhs me up'.</p>
+            </normalization>
+        </encodingDesc>
+        <profileDesc>
+            <langUsage>
+                <language ident="en">English</language>
+            </langUsage>
+        </profileDesc>
+    </teiHeader>
 <text>
     <body>
         <h2>
@@ -4158,8 +4159,7 @@ Dodd, Mead and Company</publisher>
                 </lg>
             </div>
 
-            <p>Ef 't had n't a' b'en fur you, you slow ole fool, I 'd a' be'n home
-long fo' now!</p>
+            <p>Ef 't had n't a' b'en fur you, you slow ole fool, I 'd a' be'n home long fo' now!</p>
 
 
             <div type="poem">
@@ -6370,7 +6370,7 @@ long fo' now!</p>
                 <lg type="stanza">
                     <l>The wind is soft above,</l>
                     <l>The shadows umber.</l>
-(There is a dream called Love.)
+                    <l>(There is a dream called Love.)</l>
                     <l>Take thou the fullest slumber!</l>
                 </lg>
 
