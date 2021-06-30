@@ -1,0 +1,100 @@
+body {
+    background-color: hsl(35deg 25% 65%);
+}
+.container {
+    display: block;
+    width:96%;
+    max-width: 40em;
+    margin: .5em auto;
+}
+book {
+    box-shadow: 0 0 3em 0 rgba(0,0,0,.3);
+    padding: .32em;
+    background-color: hsl(35deg 15% 85%);
+}
+h2 {
+    column-span: all;
+    display:block;
+    font-size: 200%;
+    width:100%;
+    text-align: center;
+}
+div {
+    display:block;
+}
+div[type='poem'] {
+    padding: 1em;
+    margin: .32em;
+    max-width: max-content;
+    width:100%;
+    counter-reset: stanza;
+}
+
+div[type='poem'] header {
+    display: block;
+    font-weight: 700;
+    margin-bottom: .68em;
+    break-inside: avoid-column;
+    font-variant: small-caps;
+}
+
+lg[type='stanza'] {
+    display: block;
+    margin-bottom: 1em;
+    break-inside: avoid-page;
+    counter-reset: line;
+    counter-increment: stanza;
+}
+
+lg[type='stanza']:first-of-type {
+    margin-top: 1em;
+}
+
+l {
+    display: block;
+    counter-increment: line;
+}
+
+p,l,epigraph {
+    font-variant: normal;
+}
+
+book.filtering h2,
+book.filtering div[type="poem"],
+book.filtering div[type="poem"] l,
+book.filtering p {
+    display: none;
+}
+
+book:not(.filtering) mark {
+    background-color: transparent;
+    color: inherit;
+}
+
+.found-term {
+    display: block !important;
+}
+
+l.found-term::before {
+    content: "(stanza "counter(stanza) ", line " counter(line) ") ";
+    font-size: 80%;
+    opacity: .8;
+}
+
+quote {
+    display: block;
+    margin: 0 10%;
+    font-style: italic;
+}
+bibl {
+    display: block;
+    margin: 0 10%;
+    font-size: 80%;
+    text-align: right;
+}
+
+@media print {
+    body {
+    column-count: 2;
+}
+}
