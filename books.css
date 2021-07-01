@@ -93,6 +93,19 @@ bibl {
     text-align: right;
 }
 
+div.glossaryTip {
+    display: none;
+    position: absolute;
+    background-color: #FFF;
+    box-shadow: 0 0 3em 0 rgba(0,0,0,.3);
+    padding: .32em;
+    border-radius: .32em;
+}
+
+a:hover+div.glossaryTip, a+div.glossaryTip:hover {
+    display: block;
+}
+
 @media print {
     body {
     column-count: 2;

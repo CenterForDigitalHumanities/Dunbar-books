@@ -7,6 +7,10 @@ const TEI = BOOK.querySelector("body")
 const BOOK_ELEMENT = document.body.querySelector("book")
 BOOK_ELEMENT.classList.add('container')
 
+const GLOSSARY = await fetch('glossary-min.json')
+    .then(res => res.json())
+    .then(data => data.results)
+
 BOOK_ELEMENT.innerHTML = TEI.innerHTML
 
 
@@ -48,10 +52,47 @@ var applyFilter = debounce(200, function (ev) {
 })
 
 function resetClasses(isSearching) {
-    document.querySelectorAll('.found-term').forEach(el => {
-        el?.classList.remove('found-term')
+    document.querySelectorAll('.found-term,.marked').forEach(el => {
+        el?.classList.remove('found-term','.marked')
     })
     BOOK_ELEMENT.classList[isSearching ? "add" : "remove"]("filtering")
 }
 
 searchFilter.addEventListener('input', applyFilter)
+
+// Glossary Handling
+const markupLink = (poem) => {
+    if(poem.classList.contains("marked") || !isInViewport(poem)) { return }
+    const LINES = poem.querySelectorAll('l')
+    GLOSSARY.forEach(entry=>{
+        if(!poemContainsTerm(poem,entry.title)) { return }
+        LINES.forEach(line=>{
+            line.innerHTML = line.innerHTML.replace(new RegExp(String.raw`\b${entry.title}\b`, 'gi'), match => `<a href="${entry.url}" data-ipa="${entry.configured_field_t_ipa[0]}" data-definition="${entry.configured_field_t_definition}" data-sound="${entry.download_link}">${match}</a>${glossaryTip(entry)}`)
+        })
+    })
+    poem.classList.add("marked")
+}
+
+
+let glossaryTip = ({title,url,download_link,configured_field_t_definition,configured_field_t_ipa})=>`<div class="glossaryTip">
+    <header>${title}</header>
+    <p>${configured_field_t_definition}</p>
+    <audio controls src="${download_link}">
+        <a href="${download_link}" target="_blank">download audio</a>
+    </audio>
+    <a href="${url}" target="_blank">Visit Glossary</a>
+</div>`
+
+const poemContainsTerm = (poem,term)=> (new RegExp(String.raw`\b${term}\b`, 'i')).test(poem.textContent)
+
+document.addEventListener('scroll',()=>document.querySelectorAll('[type="poem"]').forEach(markupLink))
+
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect()
+    const height = (window.innerHeight || document.documentElement.clientHeight)
+    return (
+        rect.top <=0 && rect.bottom >= height // around the screen
+        || rect.top >= 0 && rect.top <= height // entering screen
+        || rect.bottom >= 0 && rect.bottom <= height // leaving the screen
+    )
+}
