@@ -81,6 +81,10 @@ l.found-term::before {
     opacity: .8;
 }
 
+.contains-dialect{
+    background-color : yellow;
+}
+
 quote {
     display: block;
     margin: 0 10%;
