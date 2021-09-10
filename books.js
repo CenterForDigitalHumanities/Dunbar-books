@@ -111,10 +111,8 @@ function getPoemsAsJSON(){
     const POEMS = Array.from(RAWTEI.querySelectorAll("div[type='poem']"))
     const xPathSelectorForPoemDivs = "/div[@type='poem']" //XPath to return all div[type="poem"] objects
     const completePoemsDocumentURI = "https://centerfordigitalhumanities.github.io/Dunbar-books/The-Complete-Poems-TEI.xml"
-    let text = ""
     let type = "Poem"
-    let name = ""
-    const forCollection = "DLA Poems Collection"
+    const targetCollection = "DLA Poems Collection"
     let poemsJSONArray = POEMS.map((poem, i) => {
         //xPathSelectorForTextContent = "/div[@type='poem']["+(i+1)+"]/fn:string-join(l[text()],'')"
         //^^ A good selector when all you want is the text.
@@ -124,18 +122,71 @@ function getPoemsAsJSON(){
             "@type" : "Work",
             "additionalType" : "http://purl.org/dc/dcmitype/Text",
             "name" : name,
-            "xpathForPoemContent" : completePoemsDocumentURI+xPathSelectorForTextContent,
-            "forCollection" : forCollection
+            "xpathForPoemContent" : xPathSelectorForTextContent,
+            "targetCollection" : targetCollection
         }
     })
-    console.log("So you want to initialize poems?  Below is the array that has be gleamed from the TEI")
-    console.log(poemsJSONArray)
+    if(confirm("Continuing will generate "+poemsJSONArray.length+" poem entities.  Confirm to continue")){
+        generateDLAPoetryEntities(poemsJSONArray)      
+    }
 }
 
-function generateAnnotationsForPoem(RERUMpoem){
-    let contentAnnotation = {}
-    let collectionAnnotation = {}
-
-    fetch()
-    fetch()
+async function generateDLAPoetryEntities(RERUMpoems){
+    RERUMpoems.map(poemThatNeedsEntityAndAnnos => {
+        let poemEntity = {
+            "type" : "Work",
+            "additionalType" : "http://purl.org/dc/dcmitype/Text",
+            "name" : poemThatNeedsEntityAndAnnos.name
+        }
+        fetch(LR.URLS.CREATE, {
+            method: "POST",
+            mode: "cors",
+            body: poemEntity
+        })
+        .then(res => res.json())
+        .then(resObj => {return resObj.new_object_state})
+        .then(rerumEntity=>{
+            let contentAnnotation = {
+                "type" : "Annotation",
+                "motivation" : "linking",
+                "body":{
+                   "isEmbodiedIn":{
+                      "source": "https://centerfordigitalhumanities.github.io/Dunbar-books/The-Complete-Poems-TEI.xml",
+                      "selector": {
+                          "type": "XPathSelector",
+                          "value": poemThatNeedsEntityAndAnnos.xpathForPoemContent
+                      }
+                   }
+                },
+                "target":"http://store.rerum.io/v1/id/poemURI"
+            }
+            let collectionAnnotation = {
+                "type" : "Annotation",
+                "motivation" : "placing",
+                "body":{
+                   "targetCollection": poemThatNeedsEntityAndAnnos.forCollection
+                },
+                "target":"http://store.rerum.io/v1/id/poemURI"
+            }
+            let annotationsToMake = [
+                fetch(LR.URLS.CREATE, {
+                    method: "POST",
+                    mode: "cors",
+                    body: contentAnnotation
+                })
+                .then(res1 => res1.json())
+                .catch(err1 => {console.error("Could not make content annotation")}),
+                fetch(LR.URLS.CREATE, {
+                    method: "POST",
+                    mode: "cors",
+                    body: collectionAnnotation
+                })
+                .then(res2 => res2.json())
+                .catch(err2 => {console.error("Could not make collection annotation")})
+            ]
+            return Promise.all(annotationsToMake)
+            .then(twoAnnos => {})
+        })
+        .catch(err => {console.error("Could not make entity")})   
+    })
 }
