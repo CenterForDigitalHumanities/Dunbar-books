@@ -107,26 +107,35 @@ function isInViewport(element) {
 document.getElementById("dopoems").addEventListener('click', () => getPoemsAsJSON())
 
 function getPoemsAsJSON(){
+    let xPathSelectorForTextContent = ""
     const POEMS = Array.from(RAWTEI.querySelectorAll("div[type='poem']"))
+    const xPathSelectorForPoemDivs = "/div[@type='poem']" //XPath to return all div[type="poem"] objects
+    const completePoemsDocumentURI = "https://centerfordigitalhumanities.github.io/Dunbar-books/The-Complete-Poems-TEI.xml"
     let text = ""
     let type = "Poem"
     let name = ""
-    let forCollection = "DLA Poems Collection"
-    let mintedPoem = {}
-    let xPathSelectorForTextContent = ""
-    let poemText
+    const forCollection = "DLA Poems Collection"
     let poemsJSONArray = POEMS.map((poem, i) => {
-        xPathSelectorForTextContent = "/poem["+(i+1)+"]/l[text()]"
+        //xPathSelectorForTextContent = "/div[@type='poem']["+(i+1)+"]/fn:string-join(l[text()],'')"
+        //^^ A good selector when all you want is the text.
+        xPathSelectorForTextContent = xPathSelectorForPoemDivs + "["+(i+1)+"]" //Xpath to just return the (i=1)th div[type="poem"]
         name = poem.querySelector("head").textContent
-        poemText = Array.from(poem.querySelectorAll("l")).map(htmlLine => { return htmlLine.textContent})
         return {
-            "@type" : "Poem",
+            "@type" : "Work",
+            "additionalType" : "http://purl.org/dc/dcmitype/Text",
             "name" : name,
-            "text" : poemText,
-            "xpathForText" : xPathSelectorForTextContent,
+            "xpathForPoemContent" : completePoemsDocumentURI+xPathSelectorForTextContent,
             "forCollection" : forCollection
         }
     })
     console.log("So you want to initialize poems?  Below is the array that has be gleamed from the TEI")
     console.log(poemsJSONArray)
+}
+
+function generateAnnotationsForPoem(RERUMpoem){
+    let contentAnnotation = {}
+    let collectionAnnotation = {}
+
+    fetch()
+    fetch()
 }
