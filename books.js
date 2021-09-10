@@ -139,8 +139,7 @@ function getPoemsAsJSON(){
 }
 
 async function generateDLAPoetryEntities(TEIpoemsForRERUM){
-    let testPoems = [TEIpoemsForRERUM[0], TEIpoemsForRERUM[1]]
-    let allFetching = Array.from(testPoems).map(poemThatNeedsEntityAndAnnos => {
+    let allFetching = Array.from(TEIpoemsForRERUM).map(poemThatNeedsEntityAndAnnos => {
         let poemEntity = {
             "@context" : {"@vocab":"http://purl.org/vocab/frbr/core#"},
             "testing" : "forDLA",
