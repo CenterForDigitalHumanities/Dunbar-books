@@ -154,10 +154,10 @@ async function generateDLAPoetryEntities(TEIpoemsForRERUM){
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(entity)
+            body: JSON.stringify(poemEntity)
         })
         .then(res => res.json())
-        .then(resObj => {return resObj.new_object_state})
+        .then(resObj => {return resObj.new_obj_state})
         .then(rerumEntity=>{
             console.log("Successfully made a poem entity"+rerumEntity.name+".  Going to annotate it twice...")
             let contentAnnotation = {
@@ -196,7 +196,7 @@ async function generateDLAPoetryEntities(TEIpoemsForRERUM){
                     body: JSON.stringify(contentAnnotation)
                 })
                 .then(res1 => res1.json())
-                .then(anno1 => {return res1.new_object_state})
+                .then(anno1 => {return anno1.new_obj_state})
                 .catch(err1 => {console.error("Could not make content annotation")}),
                 fetch(URLS.CREATE, {
                     method: "POST",
@@ -207,10 +207,13 @@ async function generateDLAPoetryEntities(TEIpoemsForRERUM){
                     body: JSON.stringify(collectionAnnotation)
                 })
                 .then(res2 => res2.json())
-                .then(anno2 => {return res2.new_object_state})
+                .then(anno2 => {return anno2.new_obj_state})
                 .catch(err2 => {console.error("Could not make collection annotation")})
             ]
-            return Promise.all(annotationsToMake).then(annos => {console.log("successfully made 2 annos")})
+            return Promise.all(annotationsToMake).then(annos => {
+                annos.unshift(rerumEntity)
+                return annos
+            })
         })
         .catch(err => {console.error("Could not make entity")})   
     })
