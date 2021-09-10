@@ -79,7 +79,6 @@ const markupLink = (poem) => {
     const LINES = poem.querySelectorAll('l')
     GLOSSARY.forEach(entry=>{
         if(!poemContainsTerm(poem,entry.title)) { return }
-        poem.classList.add("contains-dialect")
         LINES.forEach(line=>{
             line.innerHTML = line.innerHTML.replace(new RegExp(String.raw`\b${entry.title}\b`, 'gi'), match => `<a href="${entry.url}" data-ipa="${entry.configured_field_t_ipa[0]}" data-definition="${entry.configured_field_t_definition}" data-sound="${entry.download_link}">${match}</a>${glossaryTip(entry)}`)
         })
@@ -99,7 +98,7 @@ let glossaryTip = ({title,url,download_link,configured_field_t_definition,config
 const poemContainsTerm = (poem,term)=> (new RegExp(String.raw`\b${term}\b`, 'i')).test(poem.textContent)
 
 //If you just wanted to check whether there was an instance of dialect or not, knowing all the queues.
-const poemContainsDialect = (poem, DIALECTQUEUES=GLOSSARY) => (new RegExp(DIALECTQUEUES.map(function(q){ return '\\b'+q+'\\b' }).join('|'),'g')).test(poem.textContent)
+//const poemContainsDialect = (poem, DIALECTQUEUES=GLOSSARY) => (new RegExp(DIALECTQUEUES.map(function(q){ return '\\b'+q+'\\b' }).join('|'),'g')).test(poem.textContent)
 
 document.addEventListener('scroll',()=>document.querySelectorAll('[type="poem"]').forEach(markupLink))
 
