@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book</title>
     <meta tei-src="The-Complete-Poems-TEI.xml">
-    <script type="module" src="books.js"></script>
     <link rel="stylesheet" href="books.css">
+    <script type="module" src="books.js"></script>
 </head>
 <body>
     <div class="container">
+        <input id="dopoems" type="button" value="Get a JSON Array of all Poems"/>
         <label>
             Search within poems: 
             <input id="searchFilter" type="text">
         </label>
     </div>
     <book>Dunbar Book</book>
+    
 </body>
 </html>

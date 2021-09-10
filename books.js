@@ -1,7 +1,11 @@
 const SRC = document.querySelector('meta[tei-src]')?.getAttribute("tei-src")
+let RAWTEI
 const BOOK = await fetch(SRC)
     .then(res => res.text())
-    .then(str => (new window.DOMParser()).parseFromString(str.replaceAll("head>", "header>"), "text/xml"))
+    .then(str => {
+        RAWTEI = new window.DOMParser().parseFromString(str, "text/xml")
+        return new window.DOMParser().parseFromString(str.replaceAll("head>", "header>"), "text/xml")
+    })
 
 const TEI = BOOK.querySelector("body")
 const BOOK_ELEMENT = document.body.querySelector("book")
@@ -98,4 +102,31 @@ function isInViewport(element) {
         || rect.top >= 0 && rect.top <= height // entering screen
         || rect.bottom >= 0 && rect.bottom <= height // leaving the screen
     )
+}
+
+document.getElementById("dopoems").addEventListener('click', () => getPoemsAsJSON())
+
+function getPoemsAsJSON(){
+    const POEMS = Array.from(RAWTEI.querySelectorAll("div[type='poem']"))
+    let text = ""
+    let type = "Poem"
+    let name = ""
+    let forCollection = "DLA Poems Collection"
+    let mintedPoem = {}
+    let xPathSelectorForTextContent = ""
+    let poemText
+    let poemsJSONArray = POEMS.map((poem, i) => {
+        xPathSelectorForTextContent = "/poem["+(i+1)+"]/l[text()]"
+        name = poem.querySelector("head").textContent
+        poemText = Array.from(poem.querySelectorAll("l")).map(htmlLine => { return htmlLine.textContent})
+        return {
+            "@type" : "Poem",
+            "name" : name,
+            "text" : poemText,
+            "xpathForText" : xPathSelectorForTextContent,
+            "forCollection" : forCollection
+        }
+    })
+    console.log("So you want to initialize poems?  Below is the array that has be gleamed from the TEI")
+    console.log(poemsJSONArray)
 }
