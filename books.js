@@ -17,6 +17,15 @@ const GLOSSARY = await fetch('glossary-min.json')
 
 BOOK_ELEMENT.innerHTML = TEI.innerHTML
 
+const URLS = {
+    BASE_ID: "http://devstore.rerum.io/v1",
+    DELETE: "http://tinydev.rerum.io/app/delete",
+    CREATE: "http://tinydev.rerum.io/app/create",
+    UPDATE: "http://tinydev.rerum.io/app/update",
+    OVERWRITE: "http://tinydev.rerum.io/app/overwrite",
+    QUERY: "http://tinydev.rerum.io/app/query",
+    SINCE: "http://devstore.rerum.io/v1/since",
+}
 
 const debounce = (wait, func) => {
     let timeout
@@ -119,8 +128,6 @@ function getPoemsAsJSON(){
         xPathSelectorForTextContent = xPathSelectorForPoemDivs + "["+(i+1)+"]" //Xpath to just return the (i=1)th div[type="poem"]
         name = poem.querySelector("head").textContent
         return {
-            "@type" : "Work",
-            "additionalType" : "http://purl.org/dc/dcmitype/Text",
             "name" : name,
             "xpathForPoemContent" : xPathSelectorForTextContent,
             "targetCollection" : targetCollection
@@ -131,22 +138,31 @@ function getPoemsAsJSON(){
     }
 }
 
-async function generateDLAPoetryEntities(RERUMpoems){
-    RERUMpoems.map(poemThatNeedsEntityAndAnnos => {
+async function generateDLAPoetryEntities(TEIpoemsForRERUM){
+    let testPoems = [TEIpoemsForRERUM[0], TEIpoemsForRERUM[1]]
+    let allFetching = Array.from(testPoems).map(poemThatNeedsEntityAndAnnos => {
         let poemEntity = {
+            "@context" : {"@vocab":"http://purl.org/vocab/frbr/core#"},
+            "testing" : "forDLA",
             "type" : "Work",
             "additionalType" : "http://purl.org/dc/dcmitype/Text",
             "name" : poemThatNeedsEntityAndAnnos.name
         }
-        fetch(LR.URLS.CREATE, {
+        return fetch(URLS.CREATE, {
             method: "POST",
             mode: "cors",
-            body: poemEntity
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(entity)
         })
         .then(res => res.json())
         .then(resObj => {return resObj.new_object_state})
         .then(rerumEntity=>{
+            console.log("Successfully made a poem entity"+rerumEntity.name+".  Going to annotate it twice...")
             let contentAnnotation = {
+                "@context": "http://www.w3.org/ns/anno.jsonld",
+                "testing" : "forDLA",
                 "type" : "Annotation",
                 "motivation" : "linking",
                 "body":{
@@ -158,35 +174,50 @@ async function generateDLAPoetryEntities(RERUMpoems){
                       }
                    }
                 },
-                "target":"http://store.rerum.io/v1/id/poemURI"
+                "target":rerumEntity["@id"]
             }
             let collectionAnnotation = {
+                "@context": "http://www.w3.org/ns/anno.jsonld",
+                "testing" : "forDLA",
                 "type" : "Annotation",
                 "motivation" : "placing",
                 "body":{
-                   "targetCollection": poemThatNeedsEntityAndAnnos.forCollection
+                   "targetCollection": poemThatNeedsEntityAndAnnos.targetCollection
                 },
-                "target":"http://store.rerum.io/v1/id/poemURI"
+                "target": rerumEntity["@id"]
             }
             let annotationsToMake = [
-                fetch(LR.URLS.CREATE, {
+                fetch(URLS.CREATE, {
                     method: "POST",
                     mode: "cors",
-                    body: contentAnnotation
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(contentAnnotation)
                 })
                 .then(res1 => res1.json())
+                .then(anno1 => {return res1.new_object_state})
                 .catch(err1 => {console.error("Could not make content annotation")}),
-                fetch(LR.URLS.CREATE, {
+                fetch(URLS.CREATE, {
                     method: "POST",
                     mode: "cors",
-                    body: collectionAnnotation
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(collectionAnnotation)
                 })
                 .then(res2 => res2.json())
+                .then(anno2 => {return res2.new_object_state})
                 .catch(err2 => {console.error("Could not make collection annotation")})
             ]
-            return Promise.all(annotationsToMake)
-            .then(twoAnnos => {})
+            return Promise.all(annotationsToMake).then(annos => {console.log("successfully made 2 annos")})
         })
         .catch(err => {console.error("Could not make entity")})   
     })
+    Promise.all(allFetching)
+    .then(rerumPoemEntities => {
+        console.log("Below should be all the RERUM stuff that happened")
+        console.log(rerumPoemEntities)
+    })
+    .catch(e => {console.error("Wrapper Promise.all failed somehow")})
 }
