@@ -158,22 +158,52 @@ async function generateDLAPoetryEntities(TEIpoemsForRERUM){
         .then(resObj => {return resObj.new_obj_state})
         .then(rerumEntity=>{
             console.log("Successfully made a poem entity"+rerumEntity.name+".  Going to annotate it twice...")
-            let contentAnnotation = {
+
+            let expression = {
+                "type" : "Expression",
+                "testing" : "forDLA",
+                "title" : rerumEntity.name,
+                "@context" : "FRBR",
+                "testing" : "forDLA"
+            }
+
+            let expressionAnnotation = {
                 "@context": "http://www.w3.org/ns/anno.jsonld",
                 "testing" : "forDLA",
                 "type" : "Annotation",
                 "motivation" : "linking",
                 "body":{
-                   "isEmbodiedIn":{
-                      "source": "https://centerfordigitalhumanities.github.io/Dunbar-books/The-Complete-Poems-TEI.xml",
-                      "selector": {
-                          "type": "XPathSelector",
-                          "value": poemThatNeedsEntityAndAnnos.xpathForPoemContent
-                      }
-                   }
+                    "isRealizationOf" : rerumEntity["@id"],
                 },
-                "target":rerumEntity["@id"]
-            }
+                "target": rerumExpression["@id"]
+            }        
+
+            //We should not be making manifest objects, unless we are creating an entire manifestation which we are not.
+
+            let manifestationAnnotation = {
+                "@context": "http://www.w3.org/ns/anno.jsonld",
+                "testing" : "forDLA",
+                "type" : "Annotation",
+                "motivation" : "linking",
+                "body":{
+                    "isEmbodimentOf" : rerumExpression["@id"]
+                },
+                "target":{
+                    "type" : "Manifestation",
+                    "source": "https://centerfordigitalhumanities.github.io/Dunbar-books/The-Complete-Poems-TEI.xml",
+                    "selector": {
+                        "type": "XPathSelector",
+                        "value": poemThatNeedsEntityAndAnnos.xpathForPoemContent
+                    }
+                }
+            }        
+
+            /* as soon as we start to relate it to {ecommons} we are creating new expressions.  There are more expressions than just the complete book TEI, like a Google Book.*/
+            //For each title match of rerumEntity.name in poems.json
+                //Each match needs a new Expression, looks like one above )title will match by accident)
+                   //Each Expression gets a manifestationAnnotation.  Target is URL property from poems.json
+
+            
             let collectionAnnotation = {
                 "@context": "http://www.w3.org/ns/anno.jsonld",
                 "testing" : "forDLA",
@@ -184,6 +214,7 @@ async function generateDLAPoetryEntities(TEIpoemsForRERUM){
                 },
                 "target": rerumEntity["@id"]
             }
+
             let annotationsToMake = [
                 fetch(URLS.CREATE, {
                     method: "POST",
