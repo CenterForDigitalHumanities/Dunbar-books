@@ -67,6 +67,8 @@ const markupLink = (poem) => {
     GLOSSARY.forEach(entry=>{
         if(!poemContainsTerm(poem,entry.title)) { return }
         LINES.forEach(line=>{
+            // broken to keep interface looking okay
+            if (line.innerHTML.includes("data-definition")) { return }
             line.innerHTML = line.innerHTML.replace(new RegExp(String.raw`\b${entry.title}\b`, 'gi'), match => `<a href="${entry.url}" data-ipa="${entry.configured_field_t_ipa[0]}" data-definition="${entry.configured_field_t_definition}" data-sound="${entry.download_link}">${match}</a>${glossaryTip(entry)}`)
         })
     })

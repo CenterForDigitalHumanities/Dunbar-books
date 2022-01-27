@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader xmlns="http://www.tei-c.org/ns/1.0">
+        <fileDesc>
+            <titleStmt>
+                <title>
+                    The Complete Poems of Paul Laurence Dunbar
+                </title>
+                <author>Paul Laurence Dunbar</author>
+                <commentator>William Dean Howells</commentator>
+                <respStmt>
+                    <resp>Encoded by</resp>
+                    <name xml:id="http://store.rerum.io/v1/id/5da75bb3d5de6ba6e2028444">Patrick Cuba</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>Dodd, Mead and Company</publisher>
+                <pubPlace>New York</pubPlace>
+
+                <date>1922</date>
+            </publicationStmt>
+            <publicationStmt>
+                <publisher>The Century Co.</publisher>
+                <date>1895, 1896, 1897, 1898, 1901, 1902, 1903, 1904, 1905</date>
+            </publicationStmt>
+
+            <publicationStmt>
+                <publisher>The Curtis Publishing Co.</publisher>
+                <date>1897, 1898, 1901, 1902, 1903, 1904, 1905</date>
+            </publicationStmt>
+
+            <publicationStmt>
+                <publisher>The Outlook Co.</publisher>
+                <date>1898</date>
+            </publicationStmt>
+
+            <publicationStmt>
+                <publisher>J. B. Walker</publisher>
+                <date>1898</date>
+            </publicationStmt>
+
+            <publicationStmt>
+                <publisher>W. H. Gannett</publisher>
+                <date>1903</date>
+            </publicationStmt>
+
+            <publicationStmt>
+                <publisher>
+                    Dodd, Mead and Company</publisher>
+                <date>1896, 1899, 1903, 1905, 1913</date>
+            </publicationStmt>
+        </fileDesc>
+        <encodingDesc>
+            <samplingDecl>
+                <p>Only the contained poems have been encoded within.</p>
+            </samplingDecl>
+            <normalization method="silent">
+                <p>1. Many contractions which would normally be printed together in their shortened form are left spaced, as printed. Sometimes this is done due to the meter of the poem. Other times it is just the older way that printers handled these words. The original was not always consistent about how these were handled, and may have been contracted to save space.</p>
+                <p>2. Since this book has a significant amount of dialect, no attempt was made to change any odd spellings. Some of these words are not easy to translate, but usually the context will be sufficient. For instance, the word <em>stuhs</em> means stirs, as, 'dat melody stuhs me up'.</p>
+            </normalization>
+        </encodingDesc>
+        <profileDesc>
+            <langUsage>
+                <language ident="en">English</language>
+            </langUsage>
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <h2>
+                <a name="LYRICS_OF_LOWLY_LIFE" id="LYRICS_OF_LOWLY_LIFE"></a>LYRICS OF LOWLY LIFE</h2>
+
+                <div type="poem">
+                    <head>When Malindy Sings</head>
+    
+                    <lg type="stanza">
+                        <l>G'way an' quit dat noise, Miss Lucy—</l>
+                        <l>Put dat music book away;</l>
+                        <l>What's de use to keep on tryin'?</l>
+                        <l>Ef you practise twell you 're gray,</l>
+                        <l>You cain't sta't no notes a-flyin'</l>
+                        <l>Lak de ones dat rants and rings</l>
+                        <l>F'om de kitchen to be big woods</l>
+                        <l>When Malindy sings.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>You ain't got de nachel o'gans</l>
+                        <l>Fu' to make de soun' come right,</l>
+                        <l>You ain't got de tu'ns an' twistin's</l>
+                        <l>Fu' to make it sweet an' light.</l>
+                        <l>Tell you one thing now, Miss Lucy,</l>
+                        <l>An' I 'm tellin' you fu' true,</l>
+                        <l>When hit comes to raal right singin',</l>
+                        <l>'T ain't no easy thing to do.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Easy 'nough fu' folks to hollah,</l>
+                        <l>Lookin' at de lines an' dots,</l>
+                        <l>When dey ain't no one kin sence it,</l>
+                        <l>An' de chune comes in, in spots;</l>
+                        <l>But fu' real melojous music,</l>
+                        <l>Dat jes' strikes yo' hea't and clings,</l>
+                        <l>Jes' you stan' an' listen wif me</l>
+                        <l>When Malindy sings.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Ain't you nevah hyeahd Malindy?</l>
+                        <l>Blessed soul, tek up de cross!</l>
+                        <l>Look hyeah, ain't you jokin', honey?</l>
+                        <l>Well, you don't know whut you los'.</l>
+                        <l>Y' ought to hyeah dat gal a-wa'blin',</l>
+                        <l>Robins, la'ks, an' all dem things,</l>
+                        <l>Heish dey moufs an' hides dey faces</l>
+                        <l>When Malindy sings.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Fiddlin' man jes' stop his fiddlin',</l>
+                        <l>Lay his fiddle on de she'f;</l>
+                        <l>Mockin'-bird quit tryin' to whistle,</l>
+                        <l>'Cause he jes' so shamed hisse'f.</l>
+                        <l>Folks a-playin' on de banjo</l>
+                        <l>Draps dey fingahs on de strings—</l>
+                        <l>Bless yo' soul—fu'gits to move em,</l>
+                        <l>When Malindy sings.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>She jes' spreads huh mouf and hollahs,</l>
+                        <l>"Come to Jesus," twell you hyeah</l>
+                        <l>Sinnahs' tremblin' steps and voices,</l>
+                        <l>Timid-lak a-drawin' neah;</l>
+                        <l>Den she tu'ns to "Rock of Ages,"</l>
+                        <l>Simply to de cross she clings,</l>
+                        <l>An' you fin' yo' teahs a-drappin'</l>
+                        <l>When Malindy sings.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Who dat says dat humble praises</l>
+                        <l>Wif de Master nevah counts?</l>
+                        <l>Heish yo' mouf, I hyeah dat music,</l>
+                        <l>Ez hit rises up an' mounts—</l>
+                        <l>Floatin' by de hills an' valleys,</l>
+                        <l>Way above dis buryin' sod,</l>
+                        <l>Ez hit makes its way in glory</l>
+                        <l>To de very gates of God!</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Oh, hit's sweetah dan de music</l>
+                        <l>Of an edicated band;</l>
+                        <l>An' hit's dearah dan de battle's</l>
+                        <l>Song o' triumph in de lan'.</l>
+                        <l>It seems holier dan evenin'</l>
+                        <l>When de solemn chu'ch bell rings,</l>
+                        <l>Ez I sit an' ca'mly listen</l>
+                        <l>While Malindy sings.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Towsah, stop dat ba'kin', hyeah me!</l>
+                        <l>Mandy, mek dat chile keep still;</l>
+                        <l>Don't you hyeah de echoes callin'</l>
+                        <l>F'om de valley to de hill?</l>
+                        <l>Let me listen, I can hyeah it,</l>
+                        <l>Th'oo de bresh of angels' wings,</l>
+                        <l>Sof an' sweet, "Swing Low, Sweet Chariot,"</l>
+                        <l>Ez Malindy sings.</l>
+                    </lg>
+                </div>
+
+                <div type="poem">
+                    <head>We Wear The Mask</head>
+    
+                    <lg type="stanza">
+                        <l>We wear the mask that grins and lies,</l>
+                        <l>It hides our cheeks and shades our eyes,—</l>
+                        <l>This debt we pay to human guile;</l>
+                        <l>With torn and bleeding hearts we smile,</l>
+                        <l>And mouth with myriad subtleties.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Why should the world be over-wise,</l>
+                        <l>In counting all our tears and sighs?</l>
+                        <l>Nay, let them only see us, while</l>
+                        <l>We wear the mask.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>We smile, but, O great Christ, our cries</l>
+                        <l>To thee from tortured souls arise.</l>
+                        <l>We sing, but oh the clay is vile</l>
+                        <l>Beneath our feet, and long the mile;</l>
+                        <l>But let the world dream otherwise,</l>
+                        <l>We wear the mask!</l>
+                    </lg>
+                </div>
+
+                <div type="poem">
+                    <head>Sympathy</head>
+    
+                    <lg type="stanza">
+                        <l>I know what the caged bird feels, alas!</l>
+                        <l>When the sun is bright on the upland slopes;</l>
+                        <l>When the wind stirs soft through the springing grass,</l>
+                        <l>And the river flows like a stream of glass;</l>
+                        <l>When the first bird sings and the first bud opes,</l>
+                        <l>And the faint perfume from its chalice steals—</l>
+                        <l>I know what the caged bird feels!</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>I know why the caged bird beats his wing</l>
+                        <l>Till its blood is red on the cruel bars;</l>
+                        <l>For he must fly back to his perch and cling</l>
+                        <l>When he fain would be on the bough a-swing;</l>
+                        <l>And a pain still throbs in the old, old scars</l>
+                        <l>And they pulse again with a keener sting—</l>
+                        <l>I know why he beats his wing!</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>I know why the caged bird sings, ah me,</l>
+                        <l>When his wing is bruised and his bosom sore,—</l>
+                        <l>When he beats his bars and he would be free;</l>
+                        <l>It is not a carol of joy or glee,</l>
+                        <l>But a prayer that he sends from his heart's deep core,</l>
+                        <l>But a plea, that upward to Heaven he flings—</l>
+                        <l>I know why the caged bird sings!</l>
+                    </lg>
+                </div>
+
+                <div type="poem">
+                    <head>Compensation</head>
+    
+                    <lg type="stanza">
+                        <l>Because I had loved so deeply,</l>
+                        <l>Because I had loved so long,</l>
+                        <l>God in His great compassion</l>
+                        <l>Gave me the gift of song.</l>
+                    </lg>
+    
+                    <lg type="stanza">
+                        <l>Because I have loved so vainly,</l>
+                        <l>And sung with such faltering breath,</l>
+                        <l>The Master in infinite mercy</l>
+                        <l>Offers the boon of Death.</l>
+                    </lg>
+                </div>
+
+                
+
+        </body>
+    </text>
+</TEI>
